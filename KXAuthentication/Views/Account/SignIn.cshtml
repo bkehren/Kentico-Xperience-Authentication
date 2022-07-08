@@ -1,0 +1,43 @@
+﻿@using System.Linq
+
+@model KXAuthentication.Models.Users.Account.SignInViewModel
+
+@{
+    Layout = "~/Views/Shared/_SignInLayout.cshtml";
+    ViewBag.Title = "Sign in";
+}
+
+<section class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h2>Sign in</h2>
+            <div asp-validation-summary="ModelOnly">
+                <span>Please correct the following errors</span>
+            </div>
+
+            <form asp-controller="Account" asp-action="SignIn" method="post" class="row g-3" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]">
+                <div class="col-12">
+                    <label asp-for="UserName" class="form-label"></label>
+                    <input asp-for="UserName" class="form-control" required />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="col-12">
+                    <label asp-for="Password" class="form-label"></label>
+                    <input asp-for="Password" class="form-control" required />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                @* Enable if you want the "remember me" feature to work *@
+                @*<div class="col-12">
+                    <span class="logon-remember-me-checkbox checkbox">
+                        @Html.EditorFor(model => model.RememberMe) @Html.LabelFor(model => model.RememberMe)
+                    </span>
+                </div>*@
+                <div class="col-12">
+                    <input type="submit" value="Sign in" class="btn btn-primary" />
+                </div>                            
+            </form>
+        </div>
+    </div>
+</section>
+

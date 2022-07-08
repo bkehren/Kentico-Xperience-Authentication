@@ -1,0 +1,90 @@
+﻿@{
+    Layout = null;
+}
+
+<footer class="text-center text-lg-start bg-light text-muted">
+    <section class="d-flex justify-content-end p-4 border-bottom">
+         <div>
+            <a href="https://www.facebook.com/kehrendev" target="_blank" class="me-4 text-reset">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com/kehrendev" target="_blank" class="me-4 text-reset">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/bkehren" class="me-4 text-reset">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/bkehren" class="me-4 text-reset">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </section>
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fa fa-gem me-3"></i>Kehren Dev
+                    </h6>
+                    <p>
+                        Our Awesome Logo Will Go Here!
+                    </p>
+                </div>
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Our Statement
+                    </h6>
+                    <p>
+                        <a href="https://kehrendev.com" target="_blank" class="text-reset">Kentico</a>
+                    </p>
+                    <p>
+                        <a href="https://kehrendev.com" target="_blank" class="text-reset">Xperience</a>
+                    </p>
+                    <p>
+                        <a href="https://kehrendev.com" target="_blank" class="text-reset">Rocks!</a>
+                    </p>
+                </div>
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Useful links
+                    </h6>
+                    <p>
+                        <a href="https://kehrendev.com" target="_blank" class="text-reset">Contact</a>
+                    </p>
+                    <p>
+                        <a href="https://kehrendev.com" target="_blank" class="text-reset">Us</a>
+                    </p>
+                    <p>
+                        <a href="https://kehrendev.com" target="_blank" class="text-reset">For</a>
+                    </p>
+                    <p>
+                        <a href="https://kehrendev.com" target="_blank" class="text-reset">Help</a>
+                    </p>
+                </div>
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        Contact
+                    </h6>
+                    <p><i class="fa fa-home me-3"></i> Sparta, WI 54656, US</p>
+                    <p>
+                        <i class="fa fa-envelope me-3"></i>
+                        info@kehrendev.com
+                    </p>
+                    <p><i class="fa fa-phone me-3"></i> 608-855-5338</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        Copyright: Kehren Development
+        @if (User.Identity.IsAuthenticated)
+        {
+            @* Give the user a signout button if signed in *@
+            @using (Html.BeginForm("SignOut", "Account", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-link">Sign Out</button>
+            }
+        }
+    </div>
+</footer>
