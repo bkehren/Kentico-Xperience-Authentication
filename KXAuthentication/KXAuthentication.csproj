@@ -8,8 +8,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" Version="13.0.72" />
-	<PackageReference Include="Kentico.Xperience.Libraries" Version="13.0.72" />
+    <PackageReference Include="Kentico.Xperience.AspNetCore.WebApp" Version="13.0.77" />
+	<PackageReference Include="Kentico.Xperience.Libraries" Version="13.0.77" />
 	<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
   </ItemGroup>
 
