@@ -74,6 +74,7 @@ namespace KXAuthentication.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+            // Optional addition if a user is waiting for approval.
             if (signInResult.IsNotAllowed)
             {
                 // If the 'Registration requires administrator's approval' setting is enabled and the user account
