@@ -20,6 +20,7 @@ namespace KXAuthentication
 {
     public class Startup
     {
+        // Cookie name for authentication 
         private const string AUTHENTICATION_COOKIE_NAME = "identity.authentication";
         public const string DEFAULT_WITHOUT_LANGUAGE_PREFIX_ROUTE_NAME = "DefaultWithoutLanguagePrefix";
 
@@ -33,7 +34,6 @@ namespace KXAuthentication
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             // Enable desired Kentico Xperience features
@@ -59,6 +59,7 @@ namespace KXAuthentication
                     options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResources));
                 });
 
+            // Method used to configure authentication
             ConfigureMembershipServices(services);
         }
 
@@ -74,22 +75,26 @@ namespace KXAuthentication
                 app.UseExceptionHandler("/error");
             }
 
-            // page not found config
+            // some error handling
             app.Use(async (context, next) =>
             {
                 switch (context.Response.StatusCode)
                 {
                     case (int)HttpStatusCode.NotFound:
-                        context.Request.Path = "/page-not-found"; // page in the content tree
+                        // page in the content tree
+                        context.Request.Path = "/page-not-found";
                         break;
                     case (int)HttpStatusCode.Unauthorized:
+                        // account controller
                         context.Request.Path = URLHelper.AddParameterToUrl("/Account/SignIn", "ReturnUrl", context.Request.Path);
                         break;
                     case (int)HttpStatusCode.Forbidden:
+                        // account controller
                         context.Request.Path = URLHelper.AddParameterToUrl("/Account/PermissionDenied", "ReturnUrl", context.Request.Path);
                         break;
                     case (int)HttpStatusCode.InternalServerError:
-                        context.Request.Path = "/error"; // page in the content tree
+                        // page in the content tree
+                        context.Request.Path = "/error";
                         break;
                 }
                 await next();
@@ -102,6 +107,7 @@ namespace KXAuthentication
             app.UseCors();
 
             app.UseRouting();
+            // needed for authentication to work
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -117,6 +123,10 @@ namespace KXAuthentication
             });
         }
 
+        /// <summary>
+        /// Method used to configure authentation for a Kentico Xperience site
+        /// </summary>
+        /// <param name="services"></param>
         private static void ConfigureMembershipServices(IServiceCollection services)
         {
             // Adds Xperience services required by the system's Identity implementation
@@ -142,8 +152,8 @@ namespace KXAuthentication
             // Configures the application's authentication cookie
             services.ConfigureApplicationCookie(c =>
             {
-                c.LoginPath = new PathString("/Account/SignIn");
-                c.AccessDeniedPath = new PathString("/Account/PermissionDenied");
+                c.LoginPath = new PathString("/Account/SignIn"); // calls a controller and action
+                c.AccessDeniedPath = new PathString("/Account/PermissionDenied"); // calls a controller and action
                 c.ExpireTimeSpan = TimeSpan.FromDays(10);
                 c.SlidingExpiration = true;
                 c.Cookie.Name = AUTHENTICATION_COOKIE_NAME;
